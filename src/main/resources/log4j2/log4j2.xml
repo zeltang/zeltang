@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <properties>
+        <!-- 文件输出格式 -->
+        <property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} |-%-5level [%thread] %c [%L] -| %msg%n</property>
+        <Property name="instance">zeltang</Property>
+        <Property name="log.dir">/Users/tangzelong/logs/log4j2</Property>
+    </properties>
+
+    <appenders>
+        <!-- 控制台日志打印 -->
+        <Console name="CONSOLE" target="system_out">
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+
+        <!-- 生产环境日志打印 -->
+        <!-- fileName表示创建的日志文件名，filePattern表示如果日志策略按照日期与大小做限定的话，如果大小超过100m就会按该格式将之前的的日志文件重命名，
+        并重新创建新的fileName。同理，如果日期超过限定的时间，也会进行同样的操作，下文定义一天建一个，
+        如果想一分钟建一个则filePattern="${FILE_PATH}/demo-%d{yyyy-MM-dd HH-mm}-%i.log" 如此定义-->
+        <RollingFile name="File" fileName="${log.dir}/${instance}.log" filePattern="${log.dir}/$${date:yyyy-MM}/${instance}-%d{yyyy-MM-dd-HH}-%i.log.gz">
+            <!--<PatternLayout pattern="${PATTERN}"/>-->
+            <PatternLayout alwaysWriteExceptions="false">
+                <Pattern>{"time":"%d{yyyy-MM-dd HH:mm:ss:SSS}", "level":"%p", "thread":"%t", "class":"%c{1}", "line":"%L", "content":%msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingFile>
+    </appenders>
+
+    <loggers>
+        <!-- root部分定义了log4j2的默认输出级别和方式 -->
+        <root level="info">
+            <appenderref ref="CONSOLE"/>
+            <appenderref ref="File"/>
+        </root>
+    </loggers>
+
+</configuration>

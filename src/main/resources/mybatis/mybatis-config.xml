@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 开启驼蜂标识:last_name lastName -->
+    <!--<settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <mappers>
+        <mapper resource="/com/sunlord/it/mapper/*Mapper.xml"/>
+    </mappers>-->
+    <!--<settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <mappers>
+        <mapper resource="/com/sunlord/it/mapper/mapper1/*.xml"/>
+        <mapper resource="/com/sunlord/it/mapper/mapper2/*.xml"/>
+    </mappers>-->
+
+</configuration>
