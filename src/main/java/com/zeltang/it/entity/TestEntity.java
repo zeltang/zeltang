@@ -1,5 +1,7 @@
 package com.zeltang.it.entity;
 
+import org.junit.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +12,15 @@ import java.util.Map;
  * @Version 1.0
  */
 public class TestEntity {
+
+    public TestEntity () {
+
+    }
+
+    public TestEntity (String code, Long num) {
+        this.code = code;
+        this.num = num;
+    }
 
     private Map<String, Long> testMap = new HashMap<>();
 

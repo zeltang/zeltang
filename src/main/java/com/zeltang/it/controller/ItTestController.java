@@ -4,9 +4,9 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.zeltang.chain.ReceiptHandleChain;
-import com.zeltang.chain.entity.ReceiptVo;
-import com.zeltang.chain2.DefaultHandler;
+import com.zeltang.it.tools.chain.ReceiptHandleChain;
+import com.zeltang.it.tools.chain.entity.ReceiptVo;
+import com.zeltang.it.tools.chain2.DefaultHandler;
 import com.zeltang.it.entity.DataDicValueVo;
 import com.zeltang.it.entity.TestEntity;
 import com.zeltang.it.service.MultiTestService;
@@ -42,7 +42,7 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-@Slf4j
+//@Slf4j
 @Controller
 @RequestMapping("/it")
 public class ItTestController {
@@ -1149,6 +1149,54 @@ public class ItTestController {
         ClassLayout classLayout = ClassLayout.parseClass(Object.class);
         System.out.println(classLayout.toPrintable());
 
+    }
+
+    @Test
+    public void test69 () {
+
+        int a = 1;
+        change(a);
+        System.out.println(a);
+    }
+
+    @Test
+    public void test70 () {
+
+        TestEntity originSpuPo = null;
+        if (Utils.isEmpty(originSpuPo)) {
+            System.out.println(1);
+            originSpuPo = new TestEntity();
+        }
+        if (Utils.notEmpty(originSpuPo)) {
+            System.out.println(2);
+        }
+    }
+
+    @Test
+    public void test71 () {
+        StringBuilder guidePrice = new StringBuilder();
+        guidePrice.append("20-45:").append("132313");
+
+        String substring = guidePrice.substring(0, guidePrice.toString().length()-1);
+        System.out.println(substring);
+    }
+
+
+    @Test
+    public void test72 () {
+
+        String divide = new BigDecimal("0.0123132131232132133231").multiply(new BigDecimal(1000)).setScale(10, BigDecimal.ROUND_HALF_UP).stripTrailingZeros().toPlainString();
+        BigDecimal bigDecimal = new BigDecimal(divide);
+
+        System.out.println(bigDecimal);
+//        System.out.println(Math.ceil(200/4));
+
+    }
+
+
+
+    private void change (int a) {
+        a = a + 1;
     }
 
     public static boolean validateProperty2 (Object validateObj, List<String> nullProperties, List<String> blankProperties) {
