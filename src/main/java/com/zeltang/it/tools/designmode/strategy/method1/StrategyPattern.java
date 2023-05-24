@@ -1,4 +1,9 @@
-package com.zeltang.it.tools.designmode.strategy;
+package com.zeltang.it.tools.designmode.strategy.method1;
+
+import com.zeltang.it.tools.designmode.strategy.ConcreteStrategyA;
+import com.zeltang.it.tools.designmode.strategy.ConcreteStrategyB;
+import com.zeltang.it.tools.designmode.strategy.Strategy;
+import com.zeltang.it.tools.designmode.strategy.method1.ContextPlatform;
 
 /**
  * 4.客户端调用

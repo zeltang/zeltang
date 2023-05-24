@@ -1,4 +1,6 @@
-package com.zeltang.it.tools.designmode.strategy;
+package com.zeltang.it.tools.designmode.strategy.method1;
+
+import com.zeltang.it.tools.designmode.strategy.Strategy;
 
 /**
  * 3.定义环境角色（Context）
