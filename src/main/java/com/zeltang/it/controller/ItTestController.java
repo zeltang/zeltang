@@ -1193,6 +1193,48 @@ public class ItTestController {
 
     }
 
+    @Test
+    public void test73 () {
+
+        List<TestEntity> vos = new ArrayList<>();
+        TestEntity vo1 = new TestEntity();
+        vo1.setCode("1");
+        vo1.setNum(2L);
+        vo1.setStatus("T");
+        vos.add(vo1);
+
+        TestEntity vo2 = new TestEntity();
+        vo2.setCode("2");
+        vo2.setNum(4L);
+        vo2.setStatus("F");
+        vos.add(vo2);
+
+        Map<String, TestEntity> map = new HashMap<>();
+        vos.forEach(s->map.put(s.getCode(), s));
+
+
+        List<String> list = Arrays.asList("1", "2", "3");
+
+        for (String str : list) {
+
+            if (map.containsKey(str)) {
+                TestEntity testEntity = map.get(str);
+                testEntity.setNum(222L);
+
+            } else {
+                TestEntity vo3 = new TestEntity();
+                vo3.setCode(str);
+                vo3.setNum(8L);
+                vos.add(vo3);
+            }
+
+
+        }
+
+        logger.info("123");
+
+    }
+
 
 
     private void change (int a) {
