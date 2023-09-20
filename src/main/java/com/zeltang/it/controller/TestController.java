@@ -5,10 +5,17 @@ import com.zeltang.it.entity.ExportVo;
 import com.zeltang.it.entity.TestExportVo;
 import com.zeltang.it.test1.service.ITestService;
 import com.zeltang.it.test1.vo.ProductBatchImportVo;
+import com.zeltang.it.tools.limitFlow.bucket.BucketAnnotation;
 import com.zeltang.it.utils.EasyExcelExport;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +38,50 @@ public class TestController {
 
     @Resource
     private ITestService testService;
+
+    @BucketAnnotation
+    @RequestMapping(value="/bucket")
+    public String bucket() {
+        return "访问成功";
+    }
+
+    /**
+     * POSTMAN上传Excel解析
+     * @param file
+     * @throws Exception
+     */
+    @RequestMapping("excel")
+    public void excel(@ModelAttribute MultipartFile file) throws Exception {
+        Workbook workbook = null;
+        String fileName = file.getOriginalFilename();
+        if (fileName.endsWith("xls")) {
+            POIFSFileSystem pois = new POIFSFileSystem(file.getInputStream());
+            workbook = new HSSFWorkbook(pois);
+        } else if (fileName.endsWith("xlsx")) {
+            workbook = new XSSFWorkbook(file.getInputStream());
+        }
+        Sheet sheet = workbook.getSheetAt(0);
+        // 获取第一页总行数
+        int rowCount = sheet.getPhysicalNumberOfRows();
+        // 开始循环取出每一行的数据，
+        for (int i = 0; i < rowCount; i++) {
+//            BaseArea baseArea= new BaseArea();
+            // 从第0行开始，因为第0行一般是抬头所以直接从下面一行开始
+            Row row = sheet.getRow(i);
+            // 取出每一列的值，从第0列开始
+            String code = "";//
+            String name = "";//
+            Cell cellname = row.getCell(0);
+            Cell cellmobile = row.getCell(1);
+            cellname.setCellType(CellType.STRING);
+            code = cellname.getStringCellValue().trim();
+            cellmobile.setCellType(CellType.STRING);
+            name = cellmobile.getStringCellValue().trim();
+//            baseArea.setAreaCode(code);
+//            baseArea.setAreaName(name);
+        }
+        log.info("123");
+    }
 
 
     @RequestMapping("test1")
