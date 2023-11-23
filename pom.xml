@@ -11,7 +11,7 @@
     <groupId>com.zeltang</groupId>
     <artifactId>it</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>it</name>
+    <name>zeltang</name>
     <description>Project for Spring Boot</description>
 
     <properties>
@@ -125,11 +125,11 @@
             <version>3.0.8</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
-            <version>3.16.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.redisson</groupId>-->
+<!--            <artifactId>redisson</artifactId>-->
+<!--            <version>3.16.2</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
@@ -147,6 +147,19 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>3.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.18</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.redisson/redisson -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.24.3</version>
         </dependency>
 
         <dependency>
