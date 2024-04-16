@@ -1,0 +1,3 @@
+引入metadata-extractor依赖，从音频、视频文件中获取丰富的元数据，例如位置等信息
+
+github：https://github.com/drewnoakes/metadata-extractor

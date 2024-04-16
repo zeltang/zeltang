@@ -6,7 +6,7 @@ public enum OrderTypeVo {
     LOYAL, NEW, DISSATISFIED;
 
     public String getValue() {
-        return this.getValue();
+        return this.toString();
     }
 
 }

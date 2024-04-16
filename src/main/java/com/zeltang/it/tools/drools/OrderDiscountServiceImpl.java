@@ -20,7 +20,7 @@ public class OrderDiscountServiceImpl implements IOrderDiscountService{
         // 设置折扣对象
         kieSession.setGlobal("orderDiscountVo", orderDiscountVo);
         // 设置订单对象
-        kieSession.insert(orderDiscountVo);
+        kieSession.insert(requestVo);
         // 触发规则
         kieSession.fireAllRules();
         // 终止会话
