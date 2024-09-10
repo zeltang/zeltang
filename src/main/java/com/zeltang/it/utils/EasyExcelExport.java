@@ -1,14 +1,15 @@
 package com.zeltang.it.utils;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.write.merge.LoopMergeStrategy;
 import com.alibaba.excel.write.metadata.style.WriteCellStyle;
 import com.alibaba.excel.write.metadata.style.WriteFont;
 import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
 import com.zeltang.it.entity.ExportVo;
 import com.zeltang.it.entity.TestExportVo;
-import com.zeltang.it.handler.CellMergeHandler;
-import com.zeltang.it.handler.WaterMarkCellHandler;
-import com.zeltang.it.handler.WaterMarkSheetHandler;
+import com.zeltang.it.export.CellMergeHandler;
+import com.zeltang.it.export.WaterMarkCellHandler;
+import com.zeltang.it.export.WaterMarkSheetHandler;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
@@ -57,6 +58,33 @@ public class EasyExcelExport {
                     .registerWriteHandler(new WaterMarkCellHandler(exportVo.getBackgoundColors()))
                     // 设置单元格背景，换行，列宽，工作表保护...
                     .registerWriteHandler(new WaterMarkSheetHandler(exportVo))
+                    // 这里放入动态头
+                    .head(head(exportVo.getNames())).sheet("sheet1")
+                    // 当然这里数据也可以用 List<List<String>> 去传入
+                    .doWrite(data(exportVo.getFileds(), exportVo.getData()));
+
+        } catch (Exception e) {
+        }
+    }
+
+    public void exportMergeCell(HttpServletRequest request, HttpServletResponse response, ExportVo exportVo) throws IOException {
+        try {
+            response.setContentType("application/vnd.ms-excel");
+            response.setCharacterEncoding("utf-8");
+            // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+            String fileName = URLEncoder.encode("测试", "UTF-8").replaceAll("\\+", "%20");
+            response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+
+            EasyExcel.write(response.getOutputStream()).inMemory(true)
+                    // 自定义表格的标题和内容的样式
+                    .registerWriteHandler(setHorizontalCellStyleStrategy())
+                    // 自定义单元格样式（颜色，字体等等）
+                    .registerWriteHandler(new WaterMarkCellHandler(exportVo.getBackgoundColors()))
+                    // 设置单元格背景，换行，列宽，工作表保护...
+                    .registerWriteHandler(new WaterMarkSheetHandler(exportVo))
+                    // 合并单元格，每隔2行进行合并，从第0列开始
+                    .registerWriteHandler(new LoopMergeStrategy(2, 0))
+                    .registerWriteHandler(new LoopMergeStrategy(2, 1))
                     // 这里放入动态头
                     .head(head(exportVo.getNames())).sheet("sheet1")
                     // 当然这里数据也可以用 List<List<String>> 去传入

@@ -125,23 +125,45 @@ public class TestController {
 
     @RequestMapping("test123")
     public void test123(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        String name = "字段1,字段2,字段3";
-        String filed = "col1,col2,col3";
-        int[] wids = new int[]{1500,1500,1500};
-        Short[] colors = new Short[]{57,57,57};
+        String name = "字段1,字段2,字段3,字段4,字段5,字段6";
+        String filed = "col1,col2,col3,col4,col5,col5";
+        int[] wids = new int[]{1500,1500,1500,1500,1500,1500};
+        Short[] colors = new Short[]{57,57,57,57,57,57};
         TestExportVo vo1 = new TestExportVo();
         TestExportVo vo2 = new TestExportVo();
+        TestExportVo vo3 = new TestExportVo();
+        TestExportVo vo4 = new TestExportVo();
         List<TestExportVo> vos = new ArrayList<>();
-        vo1.setCol1("123");
-        vo2.setCol1("123");
-        vo1.setCol2("abc");
-        vo2.setCol2("abc");
-        vo1.setCol3("ABC");
-        vo2.setCol3("ABC");
+        vo1.setCol1("11");
+        vo2.setCol1("12");
+        vo3.setCol1("13");
+        vo4.setCol1("14");
+        vo1.setCol2("21");
+        vo2.setCol2("22");
+        vo3.setCol2("23");
+        vo4.setCol2("24");
+        vo1.setCol3("31");
+        vo2.setCol3("32");
+        vo3.setCol3("33");
+        vo4.setCol3("34");
+        vo1.setCol4("41");
+        vo2.setCol4("42");
+        vo3.setCol4("43");
+        vo4.setCol4("44");
+        vo1.setCol5("51");
+        vo2.setCol5("52");
+        vo3.setCol5("53");
+        vo4.setCol5("54");
+        vo1.setCol6("61");
+        vo2.setCol6("62");
+        vo3.setCol6("63");
+        vo4.setCol6("64");
         vos.add(vo1);
         vos.add(vo2);
+        vos.add(vo3);
+        vos.add(vo4);
         ExportVo exportVo = new ExportVo(name.split(","), filed.split(","), colors, wids, null, "12qwert345", null, vos, true);
-        EasyExcelExport.getInstance().exportMultiSheet(req, res, exportVo);
+        EasyExcelExport.getInstance().exportMergeCell(req, res, exportVo);
     }
 
     private List<TestExportVo> data() {

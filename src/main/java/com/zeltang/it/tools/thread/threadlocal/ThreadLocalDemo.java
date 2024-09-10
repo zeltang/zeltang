@@ -1,4 +1,4 @@
-package com.zeltang.it.tools.thread;
+package com.zeltang.it.tools.thread.threadlocal;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
