@@ -87,7 +87,7 @@ public class WaterMarkHandler implements SheetWriteHandler {
 
     }
 
-    @SneakyThrows
+//    @SneakyThrows
     @Override
     public void afterSheetCreate(WriteWorkbookHolder writeWorkbookHolder, WriteSheetHolder writeSheetHolder) {
         try (ByteArrayOutputStream waterMark = createWaterMark(WATER_MARK)){
@@ -114,6 +114,8 @@ public class WaterMarkHandler implements SheetWriteHandler {
 
 //            sheet.protectSheet("123456");
             putWaterRemarkToExcel(sheet, waterMark.toByteArray());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
     }
